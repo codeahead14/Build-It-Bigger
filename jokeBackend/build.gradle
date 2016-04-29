@@ -15,10 +15,11 @@ repositories {
 }
 
 apply plugin: 'java'
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
+
 apply plugin: 'war'
 apply plugin: 'appengine'
-
-
 
 dependencies {
   appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.18'
