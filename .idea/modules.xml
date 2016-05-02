@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Gradle-JokeTelling.iml" filepath="$PROJECT_DIR$/Gradle-JokeTelling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Build-It-Bigger.iml" filepath="$PROJECT_DIR$/Build-It-Bigger.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/displayjokelib/displayjokelib.iml" filepath="$PROJECT_DIR$/displayjokelib/displayjokelib.iml" />
       <module fileurl="file://$PROJECT_DIR$/javajokelibrary/javajokelibrary.iml" filepath="$PROJECT_DIR$/javajokelibrary/javajokelibrary.iml" />
