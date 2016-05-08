@@ -17,9 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors{
+        free{
+            applicationId "com.udacity.gradle.builtitbigger.free"
+        }
+
+        paid{
+            applicationId "com.udacity.gradle.builtitbigger.paid"
+        }
+    }
 }
 
 sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -28,7 +39,7 @@ dependencies {
     compile project(':javajokelibrary')
     compile project(':displayjokelib')
     compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
+    //compile 'com.android.support:design:23.2.1'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile project(path: ':jokeBackend', configuration: 'android-endpoints')
 }
