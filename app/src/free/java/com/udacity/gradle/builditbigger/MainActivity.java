@@ -27,11 +27,10 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements AsyncResponse {
+public class MainActivity extends AppCompatActivity {
 
     private InterstitialAd mInterstitialAd;
     Context context;
-    private String mJoke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +54,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.v("Main Activity-Free","Button Pressed");
+                Log.v("Main Activity", "executing async task");
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
-                    Log.v("Main Activity-Free","Showing Ad");
                 }
-                EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask();
-                endpointsAsyncTask.execute(new Pair<Context, String>(context, "Manfred"));
-                //mJoke = "No Jokes Available at this time!! Laugh at yourself";
-                //tellJoke(mJoke);
+                new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Manfred"));;
+                tellJoke();
             }
         });
 
@@ -104,20 +99,12 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     //public void tellJoke(View view){
         //Toast.makeText(this, new JokeLib().getJoke(), Toast.LENGTH_SHORT).show();
-    public void tellJoke(String joke){
+    public void tellJoke(){
         Intent intent = new Intent(this, JokeActivity.class);
-        //JokeLib jokeSource = new JokeLib();
-        //String joke = jokeSource.getJoke();
+        JokeLib jokeSource = new JokeLib();
+        String joke = jokeSource.getJoke();
         intent.putExtra(JokeActivity.JOKE_KEY, joke);
         startActivity(intent);
     }
 
-    @Override
-    public void processFinish(String output) {
-        if( output != null)
-            mJoke = output;
-        else
-            mJoke = "Unable to Fetch Jokes at this time";
-        tellJoke(mJoke);
-    }
 }

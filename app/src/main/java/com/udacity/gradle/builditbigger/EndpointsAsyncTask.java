@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.gaurav.myapplication.jokebackend.myApi.MyApi;
@@ -21,22 +20,9 @@ import java.io.IOException;
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
-    ProgressDialog progress;
-    public AsyncResponse delegate;
-
-    @Override
-    protected void onPreExecute(){
-/*        progress = new ProgressDialog(context);
-        progress.setMessage("Loading Joke");
-        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progress.setIndeterminate(true);
-        progress.setCancelable(false);
-        progress.show();*/
-    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
-        Log.v("AsyncTask","doInBackground");
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -67,10 +53,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
-        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        //progress.dismiss();
-        //String output = "Jokes!!!!!";
-        //delegate.processFinish(output);
+        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
     }
-
 }
