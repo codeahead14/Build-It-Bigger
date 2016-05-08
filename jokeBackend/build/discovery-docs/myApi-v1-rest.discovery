@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"H01Z-1ikbwOw463Un2bFZHenx1g/XiDpzorbzjX8hLSbYihUerNfUDY\"",
+ "etag": "\"H01Z-1ikbwOw463Un2bFZHenx1g/tSmuOUK6XaAt-KF1XVFrKTebW20\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -13,9 +13,9 @@
   "x32": "http://www.google.com/images/icons/product/search-32.gif"
  },
  "protocol": "rest",
- "baseUrl": "https://myApplicationId.appspot.com/_ah/api/myApi/v1/sayHi/",
+ "baseUrl": "https://jokesupply.appspot.com/_ah/api/myApi/v1/sayHi/",
  "basePath": "/_ah/api/myApi/v1/sayHi/",
- "rootUrl": "https://myApplicationId.appspot.com/_ah/api/",
+ "rootUrl": "https://jokesupply.appspot.com/_ah/api/",
  "servicePath": "myApi/v1/sayHi/",
  "batchPath": "batch",
  "parameters": {
