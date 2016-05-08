@@ -5,6 +5,10 @@ public class MyBean {
 
     private String myData;
 
+    MyBean(){
+        myData = "TEST";
+    }
+
     public String getData() {
         return myData;
     }

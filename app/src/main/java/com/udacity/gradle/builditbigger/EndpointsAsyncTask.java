@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.gaurav.myapplication.jokebackend.myApi.MyApi;
@@ -46,8 +47,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
         context = params[0].first;
         String name = params[0].second;
+        Log.v("EndPointsAsyncTask","Name: "+name);
 
         try {
+            Log.v("EndPointsAsyncTask", myApiService.sayHi(name).execute().getData());
             return myApiService.sayHi(name).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
@@ -56,6 +59,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
+        Log.v("EndPointsAsyncTask","result: "+result);
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
     }
 }
