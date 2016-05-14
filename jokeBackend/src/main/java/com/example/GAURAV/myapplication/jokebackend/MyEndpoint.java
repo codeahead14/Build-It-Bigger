@@ -6,9 +6,12 @@
 
 package com.example.GAURAV.myapplication.jokebackend;
 
+import com.example.JokeLib;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.appengine.repackaged.com.google.common.base.Flag;
+import com.sun.javafx.util.Logging;
 
 import javax.inject.Named;
 
@@ -28,8 +31,7 @@ public class MyEndpoint {
     @ApiMethod(name = "sayHi")
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
-        response.setData("Hi, " + name);
-
+        response.setData(JokeLib.getJoke());
         return response;
     }
 

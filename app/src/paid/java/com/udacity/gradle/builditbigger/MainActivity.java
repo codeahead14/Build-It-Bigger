@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Button;
 
 import com.example.JokeLib;
 import com.example.gaurav.displayjokelib.JokeActivity;
@@ -24,16 +25,18 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = this;
         Button mButton = (Button)findViewById(R.id.joke_button);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Manfred");
+                new EndpointsAsyncTask(context).execute(new Pair<Context, String>(context, "Manfred"));
                 tellJoke();
             }
         });

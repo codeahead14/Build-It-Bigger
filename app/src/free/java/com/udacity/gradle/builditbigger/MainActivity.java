@@ -27,16 +27,21 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     private InterstitialAd mInterstitialAd;
+    private String mJoke;
     Context context;
+    EndpointsAsyncTask endpointsAsyncTask;
+    AsyncResponse asyncResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = this;
+        asyncResponse = this;
         Button mButton = (Button)findViewById(R.id.joke_button);
 
         mInterstitialAd = new InterstitialAd(this);
@@ -58,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 }
-                new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Manfred"));;
-                tellJoke();
+                endpointsAsyncTask = new EndpointsAsyncTask(context, asyncResponse);
+                endpointsAsyncTask.execute(new Pair<Context, String>(context, "Gaurav"));;
+                //tellJoke();
             }
         });
 
@@ -99,12 +105,20 @@ public class MainActivity extends AppCompatActivity {
 
     //public void tellJoke(View view){
         //Toast.makeText(this, new JokeLib().getJoke(), Toast.LENGTH_SHORT).show();
-    public void tellJoke(){
+    public void tellJoke(String joke){
         Intent intent = new Intent(this, JokeActivity.class);
-        JokeLib jokeSource = new JokeLib();
-        String joke = jokeSource.getJoke();
+        //JokeLib jokeSource = new JokeLib();
+        //String joke = jokeSource.getJoke();
         intent.putExtra(JokeActivity.JOKE_KEY, joke);
         startActivity(intent);
     }
 
+    @Override
+    public void processFinish(String output) {
+        if( output != null)
+            mJoke = output;
+        else
+            mJoke = "Unable to Fetch Jokes at this time";
+        tellJoke(mJoke);
+    }
 }

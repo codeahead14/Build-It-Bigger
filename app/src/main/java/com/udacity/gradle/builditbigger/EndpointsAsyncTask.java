@@ -20,7 +20,24 @@ import java.io.IOException;
  */
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
+    private Context mContext;
+    public AsyncResponse mAsyncResponse = null;
+    private ProgressDialog progress;
+
+    public EndpointsAsyncTask(Context context, AsyncResponse asyncResponse){
+        mContext = context;
+        this.mAsyncResponse = asyncResponse;
+    }
+
+    @Override
+    protected void onPreExecute(){
+        progress = new ProgressDialog(mContext);
+        progress.setMessage("Loading Joke");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -45,12 +62,13 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
             myApiService = builder.build();
         }
 
-        context = params[0].first;
+        mContext = params[0].first;
+        Log.v("EndPointsAsyncTask","context: "+mContext);
         String name = params[0].second;
         Log.v("EndPointsAsyncTask","Name: "+name);
 
         try {
-            Log.v("EndPointsAsyncTask", myApiService.sayHi(name).execute().getData());
+            //Log.v("EndPointsAsyncTask", myApiService.sayHi(name).execute().getData())
             return myApiService.sayHi(name).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
@@ -60,6 +78,8 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     @Override
     protected void onPostExecute(String result) {
         Log.v("EndPointsAsyncTask","result: "+result);
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        progress.dismiss();
+        this.mAsyncResponse.processFinish(result);
+        Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
     }
 }
