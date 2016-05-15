@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
                     mInterstitialAd.show();
                 }
                 endpointsAsyncTask = new EndpointsAsyncTask(context, asyncResponse);
-                endpointsAsyncTask.execute(new Pair<Context, String>(context, "Gaurav"));;
+                endpointsAsyncTask.execute(new Pair<Context, String>(context, "Udacity"));;
                 //tellJoke();
             }
         });

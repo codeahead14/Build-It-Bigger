@@ -7,6 +7,11 @@ import sun.rmi.runtime.Log;
 /** The object model for the data we are sending through endpoints */
 public class MyBean {
     private String myData;
+    //JokeLib joke;
+
+    public MyBean(){
+        //joke = new JokeLib();
+    }
 
     public String getData() {
         return myData;

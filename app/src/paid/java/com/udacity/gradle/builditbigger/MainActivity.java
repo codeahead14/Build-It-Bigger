@@ -23,21 +23,27 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     Context context;
+    EndpointsAsyncTask endpointsAsyncTask;
+    AsyncResponse asyncResponse;
+    String mJoke;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         context = this;
+        asyncResponse = this;
         Button mButton = (Button)findViewById(R.id.joke_button);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new EndpointsAsyncTask(context).execute(new Pair<Context, String>(context, "Manfred"));
-                tellJoke();
+                endpointsAsyncTask = new EndpointsAsyncTask(context, asyncResponse);
+                endpointsAsyncTask.execute(new Pair<Context, String>(context, "Gaurav"));;
+                //tellJoke();
             }
         });
     }
@@ -67,12 +73,27 @@ public class MainActivity extends AppCompatActivity {
 
     //public void tellJoke(View view){
         //Toast.makeText(this, new JokeLib().getJoke(), Toast.LENGTH_SHORT).show();
-    public void tellJoke(){
+    /*public void tellJoke(){
         Intent intent = new Intent(this, JokeActivity.class);
         JokeLib jokeSource = new JokeLib();
         String joke = jokeSource.getJoke();
         intent.putExtra(JokeActivity.JOKE_KEY, joke);
         startActivity(intent);
+    }*/
+
+    public void tellJoke(String joke){
+        Intent intent = new Intent(this, JokeActivity.class);
+        intent.putExtra(JokeActivity.JOKE_KEY, joke);
+        startActivity(intent);
+    }
+
+    @Override
+    public void processFinish(String output) {
+        if( output != null)
+            mJoke = output;
+        else
+            mJoke = "Unable to Fetch Jokes at this time";
+        tellJoke(mJoke);
     }
 
 }
